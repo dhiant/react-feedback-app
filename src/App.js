@@ -2,10 +2,23 @@ import { useState } from "react";
 import Header from "./components/Header";
 import FeedbackList from "./components/FeedbackList";
 import FeedBackData from "./data/FeedbackData";
+import ConfirmationWindow from "./components/ConfirmationWindow";
 
 function App() {
   const [feedback, setFeedback] = useState(FeedBackData);
-  const [theme, setTheme] = useState("dark"); 
+  const [confirm, setConfirm] = useState({ show: false, id: null });
+  const [theme, setTheme] = useState("dark");
+  const handleDelete = (id) => {
+    setConfirm({ show: true, id: id });
+  };
+  const handleConfirmDelete = () => {
+    const filterFeedbacks = feedback.filter((item) => item.id !== confirm.id);
+    setFeedback(filterFeedbacks);
+    setConfirm({ show: false, id: null });
+  };
+  const handleCancel = () => {
+    setConfirm({ show: false, id: null });
+  };
   const toggleTheme = () => {
     setTheme(theme === "dark" ? "light" : "dark");
   };
@@ -25,7 +38,13 @@ function App() {
           Average-Rating : {averageRating}
         </h1>
       </div>
-      <FeedbackList feedback={feedback} />
+      {confirm.show && (
+        <ConfirmationWindow
+          handleConfirmDelete={handleConfirmDelete}
+          handleCancel={handleCancel}
+        />
+      )}
+      <FeedbackList feedback={feedback} handleDelete={handleDelete} />
     </div>
   );
 }

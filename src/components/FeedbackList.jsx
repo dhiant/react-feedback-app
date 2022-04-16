@@ -1,7 +1,7 @@
 import React from "react";
 import FeedbackItem from "./FeedbackItem";
 
-const FeedbackList = ({ feedback}) => {
+const FeedbackList = ({ feedback, handleDelete }) => {
   if (feedback.length === 0 || !feedback) {
     return (
       <p className="text-center text-4xl font-serif pt-10 text-primaryText">
@@ -12,7 +12,7 @@ const FeedbackList = ({ feedback}) => {
   return (
     <div>
       {feedback.map((item) => (
-        <FeedbackItem key={item.id} />
+        <FeedbackItem key={item.id} item={item} handleDelete={handleDelete} />
       ))}
     </div>
   );
