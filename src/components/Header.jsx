@@ -1,14 +1,24 @@
 import React from "react";
+import { BsBrightnessHigh } from "react-icons/bs";
+import { FaMoon } from "react-icons/fa";
 
-const Header = () => {
+const Header = ({ toggleTheme, theme }) => {
+  console.log(theme);
   return (
-    <div className="">
-      <header className="bg-red-400 h-[4.5rem]">
-        <h1 className="text-white text-center text-3xl pt-4 font-serif">
+    <header className="h-[4.5rem] flex">
+      <div className="mx-auto">
+        <h1 className="text-headerText text-center text-2xl md:text-4xl pt-4 font-serif font-bold">
           Feedback App
         </h1>
-      </header>
-    </div>
+      </div>
+      <button onClick={toggleTheme} className="text-black p-4">
+        {theme === "dark" ? (
+          <BsBrightnessHigh className="fill-headerText" />
+        ) : (
+          <FaMoon />
+        )}
+      </button>
+    </header>
   );
 };
 

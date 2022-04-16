@@ -5,10 +5,9 @@ import FeedBackData from "./data/FeedbackData";
 
 function App() {
   const [feedback, setFeedback] = useState(FeedBackData);
-  const closeFeedback = (id) => {
-    if (window.confirm("Are you sure you want to delete?")) {
-      setFeedback(feedback.filter((item) => item.id !== id));
-    }
+  const [theme, setTheme] = useState("dark"); 
+  const toggleTheme = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
   };
   let sum = 0;
   feedback.forEach((item) => {
@@ -16,17 +15,17 @@ function App() {
   });
   const averageRating = feedback.length === 0 ? 0 : sum / feedback.length;
   return (
-    <div>
-      <Header />
-      <div className="flex items-center justify-center gap-x-96">
-        <h1 className="text-3xl bg-rose-400 text-white p-2 mt-2 rounded-md">
+    <div className={`mainWrapper bg-background ${theme} min-h-screen`}>
+      <Header toggleTheme={toggleTheme} theme={theme} />
+      <div className="md:ml-4 text-center font-serif font-bold bg-rating w-[230px] border-primaryText border-[20px] xl:w-96 flex align-middle justify-center flex-col">
+        <h1 className="md:text-2xl text-lg text-primaryText mt-2 rounded-md">
           {feedback.length} Reviews
         </h1>
-        <h1 className="text-3xl translate-x-36 bg-rose-400 text-white p-2 mt-2 rounded-md">
-          AverageRating : {averageRating}
+        <h1 className="md:text-2xl text-lg text-primaryText pb-1 rounded-md">
+          Average-Rating : {averageRating}
         </h1>
       </div>
-      <FeedbackList feedback={feedback} closeFeedback={closeFeedback} />
+      <FeedbackList feedback={feedback} />
     </div>
   );
 }
