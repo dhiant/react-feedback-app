@@ -1,73 +1,38 @@
 import React from "react";
 
-const ReviewBox = () => {
+const ReviewBox = ({ sendInput, submitInput, sendRating, currentRating }) => {
+  const ratings = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   return (
-    <div className="mx-auto flex flex-col justify-center bg-rating text-primaryText p-10 w-full md:w-[600px] lg:ml-8 rounded-lg font-serif">
-      <h1 className="text-xl pl-10">
-        How would you rate your service with us?
-      </h1>
-      <ul className="flex flex-wrap justify-center   pt-4">
-        <li className="">
-          <button className="bg-background w-10 h-10  mr-2 rounded-full font-sans">
-            1
+    <div className="p-2">
+      <div className="mx-0 sm:mx-auto  text-center bg-feedback text-primaryText p-6 sm:p-10 sm:w-[600px] w-full rounded-lg font-serif">
+        <h1 className="text-xl">How would you rate your service with us?</h1>
+        <ul className="flex flex-wrap justify-center gap-2 pt-4">
+          {ratings.map((rating) => (
+            <li key={rating} onClick={() => sendRating(rating)}>
+              <button
+                className={`${
+                  currentRating === rating ? "bg-rating" : ""
+                } bg-background hover:bg-rating active:bg-rating w-10 h-10 rounded-full font-sans`}
+              >
+                {rating}
+              </button>
+            </li>
+          ))}
+        </ul>
+        <div className="flex flex-wrap justify-between">
+          <input
+            onChange={sendInput}
+            type="text"
+            placeholder="Write a review"
+            className="w-full sm:w-96 py-3 mt-4 rounded-md pl-8 bg-background placeholder:text-primaryText"
+          />
+          <button
+            onClick={submitInput}
+            className="px-4 py-2 font-bold font-mono md:h-12 mt-4 bg-sendButton rounded-md  transition-transform duration-200 hover:scale-110 hover:bg-background hover:border-4 hover:border-rating"
+          >
+            Send
           </button>
-        </li>
-
-        <li>
-          <button className="bg-background w-10 h-10  mr-2 rounded-full font-sans">
-            2
-          </button>
-        </li>
-        <li>
-          <button className="bg-background w-10 h-10  mr-2 rounded-full font-sans">
-            3
-          </button>
-        </li>
-        <li>
-          <button className="bg-background w-10 h-10  mr-2 rounded-full font-sans">
-            4
-          </button>
-        </li>
-        <li>
-          <button className="bg-background w-10 h-10  mr-2 rounded-full font-sans">
-            5
-          </button>
-        </li>
-        <li>
-          <button className="bg-background w-10 h-10  mr-2 rounded-full font-sans">
-            6
-          </button>
-        </li>
-        <li>
-          <button className="bg-background w-10 h-10  mr-2 rounded-full font-sans">
-            7
-          </button>
-        </li>
-        <li>
-          <button className="bg-background w-10 h-10  mr-2 rounded-full font-sans">
-            8
-          </button>
-        </li>
-        <li>
-          <button className="bg-background w-10 h-10  mr-2 rounded-full font-sans">
-            9
-          </button>
-        </li>
-        <li>
-          <button className="bg-background w-10 h-10  mr-2 rounded-full font-sans">
-            10
-          </button>
-        </li>
-      </ul>
-      <div className="flex flex-wrap justify-between">
-        <input
-          type="text"
-          placeholder="Write a review"
-          className="w-96 py-3 mt-4 rounded-md pl-8"
-        />
-        <button className=" w-14 h-10 md:h-12 mt-4 bg-background rounded-md font-sans">
-          Send
-        </button>
+        </div>
       </div>
     </div>
   );

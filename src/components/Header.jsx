@@ -3,7 +3,6 @@ import { BsBrightnessHigh } from "react-icons/bs";
 import { FaMoon } from "react-icons/fa";
 
 const Header = ({ toggleTheme, theme }) => {
-  console.log(theme);
   return (
     <header className="h-[4.5rem] flex">
       <div className="mx-auto">

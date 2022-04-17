@@ -4,11 +4,19 @@ import FeedbackList from "./components/FeedbackList";
 import FeedBackData from "./data/FeedbackData";
 import ConfirmationWindow from "./components/ConfirmationWindow";
 import ReviewBox from "./components/ReviewBox";
+import Summary from "./components/Summary";
 
 function App() {
   const [feedback, setFeedback] = useState(FeedBackData);
   const [confirm, setConfirm] = useState({ show: false, id: null });
   const [theme, setTheme] = useState("dark");
+  const [input, setInput] = useState("");
+  const [rating, setRating] = useState(10);
+  let sum = 0;
+  feedback.forEach((item) => {
+    sum += item.rating;
+  });
+  const averageRating = feedback.length === 0 ? 0 : sum / feedback.length;
   const handleDelete = (id) => {
     setConfirm({ show: true, id: id });
   };
@@ -23,25 +31,28 @@ function App() {
   const toggleTheme = () => {
     setTheme(theme === "dark" ? "light" : "dark");
   };
-  let sum = 0;
-  feedback.forEach((item) => {
-    sum += item.rating;
-  });
-  const averageRating = feedback.length === 0 ? 0 : sum / feedback.length;
+  const sendInput = (e) => {
+    setInput(e.target.value);
+  };
+  const sendRating = (receivedRating) => {
+    setRating(receivedRating);
+  };
+  const submitInput = () => {
+    setFeedback([
+      { id: Math.random(), rating: rating, text: input },
+      ...feedback,
+    ]);
+  };
   return (
     <div className={`mainWrapper bg-background ${theme} min-h-screen`}>
       <Header toggleTheme={toggleTheme} theme={theme} />
-      <div className="md:flex flex-wrap">
-        <div className="md:ml-4 text-center font-serif font-bold bg-rating w-[230px] border-primaryText border-[20px] xl:w-96 flex align-middle justify-center flex-col">
-          <h1 className="md:text-2xl text-lg text-primaryText mt-2 rounded-md">
-            {feedback.length} Reviews
-          </h1>
-          <h1 className="md:text-2xl text-lg text-primaryText pb-1 rounded-md">
-            Average-Rating : {averageRating}
-          </h1>
-        </div>
-        <ReviewBox />
-      </div>
+      <ReviewBox
+        sendInput={sendInput}
+        submitInput={submitInput}
+        sendRating={sendRating}
+        currentRating={rating}
+      />
+      <Summary averageRating={averageRating} feedback={feedback} />
       {confirm.show && (
         <ConfirmationWindow
           handleConfirmDelete={handleConfirmDelete}
