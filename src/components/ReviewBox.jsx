@@ -4,7 +4,7 @@ const ReviewBox = ({ sendInput, submitInput, sendRating, currentRating }) => {
   const ratings = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   return (
     <div className="p-2">
-      <div className="mx-0 sm:mx-auto  text-center bg-feedback text-primaryText p-6 sm:p-10 sm:w-[600px] w-full rounded-lg font-serif">
+      <div className="mx-0 sm:mx-auto  text-center bg-feedback text-primaryText p-6 sm:p-10 sm:w-[600px] w-full rounded-lg font-sans">
         <h1 className="text-xl">How would you rate your service with us?</h1>
         <ul className="flex flex-wrap justify-center gap-2 pt-4">
           {ratings.map((rating) => (
@@ -28,7 +28,7 @@ const ReviewBox = ({ sendInput, submitInput, sendRating, currentRating }) => {
           />
           <button
             onClick={submitInput}
-            className="px-4 py-2 font-bold font-mono md:h-12 mt-4 bg-sendButton rounded-md  transition-transform duration-200 hover:scale-110 hover:bg-background hover:border-4 hover:border-rating"
+            className="px-4 py-2 font-bold font-mono md:h-12 mt-4 bg-rating rounded-md  transition-transform duration-200 hover:scale-110 hover:bg-background hover:border-4 hover:border-rating"
           >
             Send
           </button>

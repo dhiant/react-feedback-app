@@ -7,7 +7,6 @@ module.exports = {
       feedback: "var(--c-feedback)",
       rating: "var(--c-rating)",
       headerText: "var(--c-headerText)",
-      sendButton: "var(--c-bg-send)",
     },
     extend: {},
   },

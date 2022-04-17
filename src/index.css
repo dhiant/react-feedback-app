@@ -6,15 +6,12 @@
   --c-text: #fff;
   --c-bg: #1a1a1d;
   --c-feedback: #101010;
-  --c-rating: #101010;
+  --c-rating: #1b74e4;
   --c-headerText: #fff;
-  --c-bg-send: #404040;
 }
 .mainWrapper.light {
   --c-text: #0c285c;
   --c-bg: #f0f2f5;
   --c-feedback: #ffffff;
-  --c-rating: #1b74e4;
   --c-headerText: #153774;
-  --c-bg-send: #1b74e4;
 }
