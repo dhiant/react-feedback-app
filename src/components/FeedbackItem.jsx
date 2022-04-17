@@ -5,7 +5,7 @@ import { IoClose } from "react-icons/io5";
 const FeedbackItem = ({ item, handleDelete }) => {
   return (
     <div className="flex justify-center items-center">
-      <div className="shadow-lg w-[900px] text-primaryText m-5 rounded-lg p-10 relative font-sans bg-feedback">
+      <div className="shadow-lg w-[900px] text-primaryText m-3 rounded-lg p-10 relative font-sans bg-feedback">
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi
           blanditiis officiis consectetur facere a velit voluptates voluptatibus
