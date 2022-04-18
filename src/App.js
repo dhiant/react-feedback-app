@@ -4,7 +4,6 @@ import FeedbackList from "./components/FeedbackList";
 import FeedBackData from "./data/FeedbackData";
 import ConfirmationWindow from "./components/ConfirmationWindow";
 import ReviewBox from "./components/ReviewBox";
-import Summary from "./components/Summary";
 
 function App() {
   const [feedback, setFeedback] = useState(FeedBackData);
@@ -16,7 +15,8 @@ function App() {
   feedback.forEach((item) => {
     sum += item.rating;
   });
-  const averageRating = feedback.length === 0 ? 0 : sum / feedback.length;
+  const averageRating =
+    feedback.length === 0 ? 0 : (sum / feedback.length).toFixed();
   const handleDelete = (id) => {
     setConfirm({ show: true, id: id });
   };
@@ -42,6 +42,7 @@ function App() {
       { id: Math.random(), rating: rating, text: input },
       ...feedback,
     ]);
+    setInput("");
   };
   return (
     <div className={`mainWrapper bg-background ${theme} min-h-screen`}>
@@ -51,15 +52,19 @@ function App() {
         submitInput={submitInput}
         sendRating={sendRating}
         currentRating={rating}
+        inputValue={input}
       />
-      <Summary averageRating={averageRating} feedback={feedback} />
       {confirm.show && (
         <ConfirmationWindow
           handleConfirmDelete={handleConfirmDelete}
           handleCancel={handleCancel}
         />
       )}
-      <FeedbackList feedback={feedback} handleDelete={handleDelete} />
+      <FeedbackList
+        feedback={feedback}
+        handleDelete={handleDelete}
+        averageRating={averageRating}
+      />
     </div>
   );
 }
