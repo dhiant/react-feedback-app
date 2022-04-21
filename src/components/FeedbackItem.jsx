@@ -3,7 +3,7 @@ import { FiEdit } from "react-icons/fi";
 
 import { IoClose } from "react-icons/io5";
 
-const FeedbackItem = ({ item, handleDelete, inputValue }) => {
+const FeedbackItem = ({ item, handleDelete, inputValue,handleEdit }) => {
   return (
     <div className="flex justify-center items-center">
       <div className="shadow-lg w-[900px] text-primaryText m-3 rounded-lg p-10 relative font-sans bg-feedback">
@@ -11,7 +11,10 @@ const FeedbackItem = ({ item, handleDelete, inputValue }) => {
         <div className="flex items-center justify-center text-primaryText font-bold bg-rating absolute left-[-1rem] top-[-1rem] w-10 h-10 rounded-full">
           {item.rating}
         </div>
-        <button className="absolute top-[.8em] right-10">
+        <button
+          className="absolute top-[.8em] right-10"
+          onClick={() => handleEdit(item)}
+        >
           <FiEdit />
         </button>
         <button

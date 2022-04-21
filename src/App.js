@@ -11,6 +11,7 @@ function App() {
   const [theme, setTheme] = useState("dark");
   const [input, setInput] = useState("");
   const [rating, setRating] = useState(10);
+  const [edit, setEdit] = useState(null);
   let sum = 0;
   feedback.forEach((item) => {
     sum += item.rating;
@@ -19,6 +20,11 @@ function App() {
     feedback.length === 0 ? 0 : (sum / feedback.length).toFixed();
   const handleDelete = (id) => {
     setConfirm({ show: true, id: id });
+  };
+  const handleEdit = (feedback) => {
+    setEdit(feedback.id);
+    setInput(feedback.text);
+    setRating(feedback.rating);
   };
   const handleConfirmDelete = () => {
     const filterFeedbacks = feedback.filter((item) => item.id !== confirm.id);
@@ -38,11 +44,23 @@ function App() {
     setRating(receivedRating);
   };
   const submitInput = () => {
-    setFeedback([
-      { id: Math.random(), rating: rating, text: input },
-      ...feedback,
-    ]);
+    if (edit) {
+      // edit
+      const editedFeedbacks = feedback.map((item) =>
+        edit === item.id ? { ...item, rating: rating, text: input } : item
+      );
+      setFeedback(editedFeedbacks);
+      setEdit(null);
+    } else {
+      // add feedback
+      setFeedback([
+        { id: Math.random(), rating: rating, text: input },
+        ...feedback,
+      ]);
+    }
+    // resetting inputs and rating
     setInput("");
+    setRating(10);
   };
   return (
     <div className={`mainWrapper bg-background ${theme} min-h-screen`}>
@@ -63,6 +81,7 @@ function App() {
       <FeedbackList
         feedback={feedback}
         handleDelete={handleDelete}
+        handleEdit={handleEdit}
         averageRating={averageRating}
       />
     </div>

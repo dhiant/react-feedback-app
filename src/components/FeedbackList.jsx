@@ -3,7 +3,12 @@ import FeedbackItem from "./FeedbackItem";
 import Summary from "./Summary";
 import { AnimatePresence, motion } from "framer-motion";
 
-const FeedbackList = ({ feedback, handleDelete, averageRating }) => {
+const FeedbackList = ({
+  feedback,
+  handleDelete,
+  averageRating,
+  handleEdit,
+}) => {
   if (feedback.length === 0 || !feedback) {
     return (
       <p className="text-center text-4xl font-serif pt-10 text-primaryText">
@@ -27,6 +32,7 @@ const FeedbackList = ({ feedback, handleDelete, averageRating }) => {
               key={item.id}
               item={item}
               handleDelete={handleDelete}
+              handleEdit={handleEdit}
             />
           </motion.div>
         ))}
